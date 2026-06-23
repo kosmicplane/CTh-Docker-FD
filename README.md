@@ -1,3 +1,4 @@
 # CalTech-Mars-Helicopter
 (Simulation Or Emulation??) platform for Mars Helicopter Proposal.....
-HI I LOVE AREPA
+Yes. True story.
+
