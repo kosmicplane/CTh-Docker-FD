@@ -1,0 +1,31 @@
+services:
+  atmos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: atmos:px4-ros2-jazzy-acados-embedded
+    container_name: atmos_jazzy
+    network_mode: host
+    ipc: host
+    privileged: true
+    stdin_open: true
+    tty: true
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - QT_QPA_PLATFORM=xcb
+      - LIBGL_ALWAYS_SOFTWARE=1
+      - ACADOS_SOURCE_DIR=/opt/acados
+      - LD_LIBRARY_PATH=/opt/acados/lib
+      - PYTHONPATH=/opt/acados/interfaces/acados_template
+    volumes:
+      # GUI support for Gazebo/RViz.
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+
+      # Optional direct rendering support. Safe on most Linux desktops.
+      - /dev/dri:/dev/dri
+
+      # Optional shell history persistence.
+      - ${HOME}/.bash_history:/root/.bash_history
+    working_dir: /workspace
+    command: bash
